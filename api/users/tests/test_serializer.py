@@ -1,42 +1,47 @@
-from django.test import TestCase
-from .. import serializers
+from django.core.urlresolvers import reverse
+from rest_framework.test import APITestCase
+from django.contrib.auth.models import User
+from rest_framework import status
 
 
-class RegistrationSerializerTest(TestCase):
+class RegisterSerializerTest(APITestCase):
     def setUp(self):
-        super(RegistrationSerializerTest, self).setUp()
-        self.data = {
-            'name': 'Robert',
-            'email': 'Bobby.Tables+327@xkcd.com',
-            'password': 'Sup3RSecre7paSSw0rD',
-            'password2': 'Sup3RSecre7paSSw0rD',
+        # We want to go ahead and originally create a user. 
+        self.test_user = User.objects.create_user('testuser', 'test@example.com', 'testpassword')
+
+        # URL for creating an account.
+        self.create_url = reverse('register')
+
+    def test_create_user(self):
+        """
+        Ensure we can create a new user and a valid token is created with it.
+        """
+        data = {
+            'username': 'foobar',
+            'email': 'foobar@example.com',
+            'password': 'somepassword',
+            'password2': 'somepassword'
         }
 
-    def test_deserialize(self):
-        serializer = serializers.RegistrationSerializer(data=self.data)
-        self.assertTrue(serializer.is_valid())
+        response = self.client.post(self.create_url , data, format='json')
 
-        validated_data = serializer.validated_data
-        self.assertEqual(validated_data['name'], self.data['name'])
-        self.assertEqual(validated_data['email'], self.data['email'].lower())
-        self.assertEqual(validated_data['password'], self.data['password'])
+        # We want to make sure we have two users in the database..
+        self.assertEqual(User.objects.count(), 2)
+        # And that we're returning a 201 created code.
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    # def test_deserialize_invalid_new_password(self):
-    #     self.data['password'] = '2short'
 
-    #     serializer = serializers.RegistrationSerializer(data=self.data)
-    #     self.assertFalse(serializer.is_valid())
-    #     self.assertIn('password', serializer.errors)
+    def test_create_user_password_mismatch(self):
+        """
+        Ensure we can create a new user and a valid token is created with it.
+        """
+        data = {
+            'username': 'foobar',
+            'email': 'foobar@example.com',
+            'password': 'somepassword',
+            'password2': 'somepassword22'
+        }
 
-    # def test_deserialize_mismatched_passwords(self):
-    #     self.data['password2'] = 'different_password'
-    #     serializer = serializers.RegistrationSerializer(data=self.data)
-    #     self.assertFalse(serializer.is_valid())
-    #     self.assertIn('password2', serializer.errors)
-
-    # def test_deserialize_no_email(self):
-    #     self.data['email'] = None
-
-    #     serializer = serializers.RegistrationSerializer(data=self.data)
-    #     self.assertFalse(serializer.is_valid())
-    #     self.assertIn('email', serializer.errors)
+        response = self.client.post(self.create_url , data, format='json')
+        # And that we're returning a 201 created code.
+        self.assertEqual(response.status_code, 400)
