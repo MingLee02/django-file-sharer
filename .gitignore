@@ -5,6 +5,7 @@ build/
 dist/
 db.sqlite3
 node_modules
+bower_components
 dist
 coverage
 lib
