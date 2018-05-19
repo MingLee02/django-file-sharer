@@ -2,7 +2,8 @@
 (function (angular) {
     'use strict';
     var module = angular.module('app', [
-        'ngRoute'
+        'ngRoute',
+        'registerUserDirective',
     ]);
 
     module.config([
