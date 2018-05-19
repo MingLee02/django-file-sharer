@@ -4,3 +4,8 @@ api/migrations/__pycache__/
 build/
 dist/
 db.sqlite3
+node_modules
+dist
+coverage
+lib
+package-lock.json
