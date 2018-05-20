@@ -17,11 +17,6 @@
                             .register.post(scope.data)
                             .then(function () {
                                 scope.registered = true;
-                                if (angular.isDefined(scope.onRegister)) {
-                                    scope.onRegister({
-                                        user: angular.copy(scope.data)
-                                    });
-                                }
                                 scope.data = {};
                             });
                     };

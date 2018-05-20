@@ -5,6 +5,7 @@
         'ngRoute',
         'registerUserDirective',
         'loginUserDirective',
+        'fileUploadDirective',
     ]);
 
     module.config([
