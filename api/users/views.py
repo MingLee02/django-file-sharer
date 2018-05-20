@@ -42,7 +42,6 @@ class UserLogin(generics.GenericAPIView):
 
     def login(self):
         self.user = self.serializer.validated_data['user']
-        print(self.user)
         self.token = Token.objects.get_or_create(user=self.user)
         self.process_login()
 
@@ -53,4 +52,9 @@ class UserLogin(generics.GenericAPIView):
         self.serializer.is_valid(raise_exception=True)
 
         self.login()
-        return response.Response(self.serializer.data, status=status.HTTP_200_OK)
+        
+        user_dict = {
+            'username': self.user.username,
+            'active': self.user.is_active
+        }
+        return response.Response(user_dict, status=status.HTTP_200_OK)
