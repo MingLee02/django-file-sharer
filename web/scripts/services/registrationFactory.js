@@ -10,7 +10,6 @@
 
             var register = {
                 post: function (data) {
-                    console.log(data)
                     return $http({
                         method: 'POST',
                         url: 'http://localhost:8000/users/register',

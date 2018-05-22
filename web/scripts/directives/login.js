@@ -1,13 +1,13 @@
 (function (angular) {
     'use strict';
 
-    const module = angular.module('loginUserDirective', ['loginService']);
+    const module = angular.module('loginUserDirective', ['auth']);
 
     module.directive('loginForm', [
-        'loginFactory',
+        'authService',
         '$location',
         '$rootScope',
-        function(loginFactory, $location, $rootScope) {
+        function(authService, $location, $rootScope) {
             return {
                 restrict: 'A',
                 templateUrl: '../../templates/login-form.html',
@@ -15,8 +15,7 @@
                     scope.data = {};
                 
                     scope.login = function () {
-                        loginFactory
-                            .login.post(scope.data)
+                        authService.login(scope.data)
                             .then(function (response) {
                                 console.log(response)
                                 scope.signedIn = true;
