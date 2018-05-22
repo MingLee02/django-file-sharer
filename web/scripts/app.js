@@ -6,10 +6,12 @@
         'registerUserDirective',
         'loginUserDirective',
         'fileUploadDirective',
+        'navigation',
+        'ngCookies'
     ]);
 
     module.config([
-        '$routeProvider',
+       '$routeProvider',
         function ($routeProvider) {
             $routeProvider
                 .when("/", {
@@ -26,4 +28,20 @@
                 });
         }
     ]);
+
+    module.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+        $httpProvider.defaults.withCredentials = true;
+    }]);
+
+   module.run( function run( $http, $cookies ){
+      $http({
+          method : "GET",
+          url : 'http://localhost:8000/token/',
+      }).then(function (response) {
+        console.log(response)
+           $http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
+      });
+  })
 }(window.angular));

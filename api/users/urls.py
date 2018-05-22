@@ -10,5 +10,4 @@ urlpatterns = [
         view=views.UserRegister.as_view(),
         name='register',
     ),
-    url(r'^login/$', views.UserLogin.as_view(), name='login')
 ]

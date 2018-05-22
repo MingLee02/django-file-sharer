@@ -1,6 +1,6 @@
 from rest_framework import generics, response, status, views
 from rest_framework.authtoken.models import Token
-from django.contrib.auth import login as django_login
+from rest_framework.views import APIView
 from . import serializers
 
 
@@ -27,29 +27,3 @@ class UserRegister(generics.CreateAPIView):
             data={'data': ok_message},
             status=status.HTTP_201_CREATED,
         )
-
-
-class UserLogin(generics.GenericAPIView):
-    serializer_class = serializers.LoginSerializer
-
-    def process_login(self):
-        django_login(self.request, self.user)
-
-    def login(self):
-        self.user = self.serializer.validated_data['user']
-        self.token = Token.objects.get_or_create(user=self.user)
-        self.process_login()
-
-
-    def post(self, request, *args, **kwargs):
-        self.request = request
-        self.serializer = self.get_serializer(data=self.request.data, context={'request': request})
-        self.serializer.is_valid(raise_exception=True)
-
-        self.login()
-        
-        user_dict = {
-            'username': self.user.username,
-            'active': self.user.is_active
-        }
-        return response.Response(user_dict, status=status.HTTP_200_OK)

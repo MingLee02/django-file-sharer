@@ -12,8 +12,14 @@
                 post: function (data) {
                     return $http({
                         method: 'POST',
-                        url: 'http://localhost:8000/users/login/',
+                        url: 'http://localhost:8000/auth/login/',
                         data: data
+                    });
+                },
+                logout: function () {
+                    return $http({
+                        method: 'GET',
+                        url: 'http://localhost:8000/auth/logout/',
                     });
                 }
             };

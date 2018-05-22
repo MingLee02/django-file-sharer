@@ -6,7 +6,8 @@
     module.directive('loginForm', [
         'loginFactory',
         '$location',
-        function(loginFactory, $location) {
+        '$rootScope',
+        function(loginFactory, $location, $rootScope) {
             return {
                 restrict: 'A',
                 templateUrl: '../../templates/login-form.html',
@@ -17,9 +18,10 @@
                         loginFactory
                             .login.post(scope.data)
                             .then(function (response) {
+                                console.log(response)
                                 scope.signedIn = true;
                              
-                                scope.$root.user = {
+                                $rootScope.user = {
                                     'usename': response.data.username,
                                     'active': response.data.active
                                 }
