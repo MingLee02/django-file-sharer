@@ -11,10 +11,13 @@
             var file = {
                 post: function (data) {
                     var uploadUrl = 'http://localhost:8000/file/upload/'
-                    return $http.post(uploadUrl, data, {
+                    return $http({
+                        method: 'POST',
+                        url: 'http://localhost:8000/file/upload/',
+                        data: data,
                         transformRequest: angular.identity,
                         headers: {'Content-Type': undefined}
-                    })
+                    });
                 }
             };
 
