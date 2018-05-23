@@ -22,8 +22,7 @@
                             formData.append(key, value);
                         });
 
-                        fileFactory
-                            .file.post(formData)
+                        fileFactory.uploadFile(formData)
                             .then(function () {
                                 scope.uploaded = true;
                                 scope.data = {};

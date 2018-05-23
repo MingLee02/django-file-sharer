@@ -8,8 +8,7 @@
         'authService',
         '$rootScope',
         '$location',
-        function ($scope, authService, $rootScope, $location) {
-            
+        function ($scope, authService, $rootScope, $location) {          
             $scope.logout = function () {
                 authService.logout()
                     .then(function (response) {                        

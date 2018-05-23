@@ -8,21 +8,26 @@
         '$q',
         function ($http, $q) {
 
-            var file = {
-                post: function (data) {
-                    var uploadUrl = 'http://localhost:8000/file/upload/'
-                    return $http({
-                        method: 'POST',
-                        url: 'http://localhost:8000/file/upload/',
-                        data: data,
-                        transformRequest: angular.identity,
-                        headers: {'Content-Type': undefined}
-                    });
-                }
+            var uploadFile = function (data) {
+                return $http({
+                    method: 'POST',
+                    url: 'http://localhost:8000/file/upload/',
+                    data: data,
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                });
             };
 
+            var getFileList = function () {
+                return $http({
+                    method: 'GET',
+                    url: 'http://localhost:8000/file/list/',
+                });
+            }
+
             return {
-                file: file
+                'uploadFile': uploadFile,
+                'getFileList': getFileList
             };
         }
     ]);

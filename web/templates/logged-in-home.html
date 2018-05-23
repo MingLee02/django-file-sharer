@@ -1,9 +1,18 @@
 U have logged in
 
-<div ng-controller="navCtrl" >
-	<ul>
+<div ng-controller="navCtrl">
+    <ul>
         <li ng-click="logout()">Logout</li>
     </ul>
 </div>
 
-<form id='file-upload' file-upload-form ng-submit="upload()"></form>
+<form id='file-upload' file-upload-form ng-submit="upload()"></form
+
+<div ng-if="fileList">
+    <ul class="list-unstyled" ng-repeat="file in fileList track by $index">
+        <li class='items'>
+        	<p>{{ file.title }}</p>
+         	<a href="{{file.file}}" download>Download File</a>
+        </li>
+    </ul>
+</div>

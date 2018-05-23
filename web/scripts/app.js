@@ -7,7 +7,8 @@
         'loginUserDirective',
         'fileUploadDirective',
         'navigation',
-        'ngCookies'
+        'ngCookies',
+        'main'
     ]);
 
     module.config([
@@ -24,7 +25,8 @@
                 })
                 .when("/signed-in", {
                     templateUrl: '../templates/logged-in-home.html',
-                    name: 'logged-in-home'
+                    name: 'logged-in-home',
+                    controller: 'mainCtrl'
                 });
         }
     ]);
@@ -35,13 +37,12 @@
         $httpProvider.defaults.withCredentials = true;
     }]);
 
-   module.run( function run( $http, $cookies ){
-      $http({
-          method : "GET",
-          url : 'http://localhost:8000/token/',
-      }).then(function (response) {
-        console.log(response)
-           $http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
-      });
-  })
+	module.run( function run( $http, $cookies ){
+		$http({
+			method : "GET",
+			url : 'http://localhost:8000/token/',
+		}).then(function (response) {
+			$http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
+		});
+	})
 }(window.angular));
