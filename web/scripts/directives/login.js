@@ -10,7 +10,7 @@
         function(authService, $location, $rootScope) {
             return {
                 restrict: 'A',
-                templateUrl: '../../templates/login-form.html',
+                templateUrl: '../../templates/forms/login.html',
                 link: function (scope) {
                     scope.data = {};
                 

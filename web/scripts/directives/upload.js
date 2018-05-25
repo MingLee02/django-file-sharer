@@ -8,7 +8,7 @@
         function(fileFactory) {
             return {
                 restrict: 'A',
-                templateUrl: '../../templates/upload-form.html',
+                templateUrl: '../../templates/forms/upload.html',
                 link: function (scope, elem) {
                     scope.data = {};
                 

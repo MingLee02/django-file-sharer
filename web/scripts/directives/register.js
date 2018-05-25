@@ -8,7 +8,7 @@
         function(registrationFactory) {
             return {
                 restrict: 'A',
-                templateUrl: '../../templates/register-form.html',
+                templateUrl: '../../templates/forms/register.html',
                 link: function (scope) {
                     scope.data = {};
                 
