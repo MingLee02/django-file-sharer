@@ -37,7 +37,7 @@
         $httpProvider.defaults.withCredentials = true;
     }]);
 
-	module.run( function run( $http, $cookies ){
+	module.run( function run( $http, $cookies ) {
 		$http({
 			method : "GET",
 			url : 'http://localhost:8000/token/',

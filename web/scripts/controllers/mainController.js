@@ -16,6 +16,7 @@
                 fileFactory.getFileList().then(function (response) {                        
                     if (checkFileListLength(response)) {
                         $scope.fileList = response.data;
+                        $scope.displayList = true;
                     }
                 });
             }

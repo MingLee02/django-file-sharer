@@ -6,13 +6,39 @@ U have logged in
     </ul>
 </div>
 
-<form id='file-upload' file-upload-form ng-submit="upload()"></form
+<form id='file-upload' file-upload-form ng-submit="upload()"></form>
 
-<div ng-if="fileList">
-    <ul class="list-unstyled" ng-repeat="file in fileList track by $index">
-        <li class='items'>
-        	<p>{{ file.title }}</p>
-         	<a href="{{file.file}}" download>Download File</a>
-        </li>
-    </ul>
+<button ng-click="displayList = !displayList">Toggle List View/Table View</button>
+
+<div ng-if="displayList">
+    <div ng-if="fileList">
+        <ul class="list-unstyled" ng-repeat="file in fileList track by $index">
+            <li class='items'>
+                <h2>{{ file.title }}</h2>
+                <p>File Name: {{ file.file }}</p>
+                <p>Created Date: {{ file.timestamp | date }}</p>
+                <p>{{ file.description }}</p>
+                <a href="{{file.file}}" download>Download File</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div ng-if="!displayList">
+    <table ng-if="fileList">
+        <tr>
+            <th>Title</th>
+            <th>File Name</th>
+            <th>Created Date</th>
+            <th>Description</th>
+            <th>Download</th>
+        </tr>
+        <tr ng-repeat="file in fileList track by $index">
+            <td>{{ file.title }}</td>
+            <td>{{ file.file }}</td>
+            <td>{{ file.timestamp | date }}</td>
+            <td>{{ file.description }}</td>
+            <td><a href="{{file.file}}" download>Download</a></td>
+        </tr>
+    </table>
 </div>
