@@ -6,8 +6,7 @@
     module.directive('loginForm', [
         'authService',
         '$location',
-        '$rootScope',
-        function(authService, $location, $rootScope) {
+        function(authService, $location) {
             return {
                 restrict: 'A',
                 templateUrl: '../../templates/forms/login.html',
@@ -17,14 +16,7 @@
                     scope.login = function () {
                         authService.login(scope.data)
                             .then(function (response) {
-                                console.log(response)
                                 scope.signedIn = true;
-                             
-                                $rootScope.user = {
-                                    'usename': response.data.username,
-                                    'active': response.data.active
-                                }
-                                
                                 $location.path("signed-in");
                             });
                         
