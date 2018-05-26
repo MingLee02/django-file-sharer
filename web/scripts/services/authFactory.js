@@ -19,6 +19,7 @@
                 return $http({
                     method: 'POST',
                     url: 'http://localhost:8000/auth/login/',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
                     data: data
                 });
             };

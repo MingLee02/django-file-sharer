@@ -15,10 +15,9 @@
                 
                     scope.login = function () {
                         authService.loginGet()
-                            .then(function (response) {
+                            .then(function () {
                                 authService.login(scope.data)
                                 .then(function (response) {
-                                    scope.signedIn = true;
                                     $location.path("signed-in");
                                 });
                             });

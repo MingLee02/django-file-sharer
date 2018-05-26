@@ -36,13 +36,4 @@
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
         $httpProvider.defaults.withCredentials = true;
     }]);
-
-	module.run( function run( $http, $cookies ) {
-		$http({
-			method : "GET",
-			url : 'http://localhost:8000/token/',
-		}).then(function (response) {
-			$http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
-		});
-	})
 }(window.angular));
