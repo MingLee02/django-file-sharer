@@ -14,12 +14,14 @@
                     scope.data = {};
                 
                     scope.login = function () {
-                        authService.login(scope.data)
+                        authService.loginGet()
                             .then(function (response) {
-                                scope.signedIn = true;
-                                $location.path("signed-in");
+                                authService.login(scope.data)
+                                .then(function (response) {
+                                    scope.signedIn = true;
+                                    $location.path("signed-in");
+                                });
                             });
-                        
                     };
                 }
             }

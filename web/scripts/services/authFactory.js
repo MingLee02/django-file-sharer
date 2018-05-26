@@ -8,6 +8,13 @@
         '$http',
         function ($http) {
 
+            var loginGet = function () {
+                return $http({
+                    method: 'GET',
+                    url: 'http://localhost:8000/auth/login/'
+                });
+            };
+
             var login = function (data) {
                 return $http({
                     method: 'POST',
@@ -24,6 +31,7 @@
             };
 
             return {
+                'loginGet': loginGet,
                 'login': login,
                 'logout': logout,
             };
