@@ -10,17 +10,20 @@
 
             var loginGet = function () {
                 return $http({
-                    method: 'GET',
-                    url: 'http://localhost:8000/auth/login/'
+                    method: 'POST',
+                    url: 'http://localhost:8000/api-token-auth/',
+                    data: {
+                        'username': 'me',
+                        'password': 'me'
+                    }
                 });
             };
 
-            var login = function (data) {
+            var login = function (data, token) {
                 return $http({
                     method: 'POST',
                     url: 'http://localhost:8000/auth/login/',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
-                    data: data
+                    headers: {Authorization: 'Bearer ' + token.token},
                 });
             };
 

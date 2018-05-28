@@ -18,10 +18,11 @@
                 });
             };
 
-            var getFileList = function () {
+            var getFileList = function (token) {
                 return $http({
                     method: 'GET',
                     url: 'http://localhost:8000/file/list/',
+                    headers: {Authorization: 'Token ' + token.token},
                 });
             }
 

@@ -22,6 +22,7 @@ class UserRegister(generics.CreateAPIView):
     def is_valid(self, serializer):
         user = serializer.save()
         ok_message = 'Your account has been created.'
+        token, created = Token.objects.get_or_create(user=user)
 
         return response.Response(
             data={'data': ok_message},
