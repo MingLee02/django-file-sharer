@@ -2,8 +2,11 @@ from rest_framework import generics, response, status, views
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from . import serializers
+from rest_framework.decorators import authentication_classes, permission_classes
 
 
+@authentication_classes([])
+@permission_classes([])
 class UserRegister(generics.CreateAPIView):
     serializer_class = serializers.RegistrationSerializer
 

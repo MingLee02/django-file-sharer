@@ -7,23 +7,11 @@
     module.factory('authService', [
         '$http',
         function ($http) {
-
-            var loginGet = function () {
+            var login = function (data) {
                 return $http({
                     method: 'POST',
                     url: 'http://localhost:8000/api-token-auth/',
-                    data: {
-                        'username': 'me',
-                        'password': 'me'
-                    }
-                });
-            };
-
-            var login = function (data, token) {
-                return $http({
-                    method: 'POST',
-                    url: 'http://localhost:8000/auth/login/',
-                    headers: {Authorization: 'Bearer ' + token.token},
+                    data: data
                 });
             };
 
@@ -35,7 +23,6 @@
             };
 
             return {
-                'loginGet': loginGet,
                 'login': login,
                 'logout': logout,
             };

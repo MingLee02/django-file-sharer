@@ -4,8 +4,8 @@
     const module = angular.module('fileUploadDirective', ['fileService']);
 
     module.directive('fileUploadForm', [
-        'fileFactory',
-        function(fileFactory) {
+        'fileFactory', '$rootScope',
+        function(fileFactory, $rootScope) {
             return {
                 restrict: 'A',
                 templateUrl: '../../templates/forms/upload.html',
@@ -22,7 +22,8 @@
                             formData.append(key, value);
                         });
 
-                        fileFactory.uploadFile(formData)
+                        var token = $rootScope.Token;
+                        fileFactory.uploadFile(formData, token)
                             .then(function () {
                                 scope.uploaded = true;
                                 scope.data = {};

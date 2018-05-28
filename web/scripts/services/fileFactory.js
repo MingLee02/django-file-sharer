@@ -8,13 +8,17 @@
         '$q',
         function ($http, $q) {
 
-            var uploadFile = function (data) {
+            var uploadFile = function (data, token) {
+                console.log('iom')
                 return $http({
                     method: 'POST',
                     url: 'http://localhost:8000/file/upload/',
                     data: data,
                     transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}
+                    headers: {
+                        'Content-Type': undefined,
+                        'Authorization': 'Token ' + token.token
+                    }
                 });
             };
 

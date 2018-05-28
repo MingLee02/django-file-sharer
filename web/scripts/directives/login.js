@@ -15,15 +15,10 @@
                     scope.data = {};
                 
                     scope.login = function () {
-                        authService.loginGet()
+                        authService.login(scope.data)
                             .then(function (response) {
-                                $rootScope.Token = response.data
+                                $rootScope.Token = response.data;
                                 $location.path("signed-in");
-                                // var token = response.data
-                                // authService.login(scope.data, token)
-                                // .then(function (response) {
-                                //     $location.path("signed-in");
-                                // });
                             });
                     };
                 }
