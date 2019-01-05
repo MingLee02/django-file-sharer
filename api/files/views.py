@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from rest_framework import status
 from .serializers import FileSerializer
 from .models import File
@@ -27,3 +28,11 @@ class FileList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return File.objects.filter(Q(owner=user) | Q(is_public=True))
+
+
+class PublicFileList(generics.ListAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = FileSerializer
+
+    def get_queryset(self):
+        return File.objects.filter(is_public=True)

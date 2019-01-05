@@ -8,7 +8,8 @@
         'fileUploadDirective',
         'navigation',
         'ngCookies',
-        'main'
+        'main',
+        'home'
     ]);
 
     module.config([
@@ -17,7 +18,8 @@
             $routeProvider
                 .when("/", {
                     templateUrl: '../templates/home.html',
-                    name: 'home'
+                    name: 'home',
+                    controller: 'homeCtrl'
                 })
                 .when("/register", {
                     templateUrl: '../templates/register.html',

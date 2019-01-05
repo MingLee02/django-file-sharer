@@ -5,19 +5,28 @@
 
     module.directive('registerForm', [
         'registrationFactory',
-        function(registrationFactory) {
+        '$location',
+        '$rootScope',
+        function(registrationFactory, $location, $rootScope) {
             return {
                 restrict: 'A',
                 templateUrl: '../../templates/forms/register.html',
                 link: function (scope) {
-                    scope.data = {};
-                
+                    scope.errors = [];
+
                     scope.register = function () {
+                        scope.errors = [];
                         registrationFactory
                             .register.post(scope.data)
                             .then(function () {
-                                scope.registered = true;
-                                scope.data = {};
+                                scope.data = {}
+                                $rootScope.$broadcast("registered");
+                                $location.path("/");
+                            })
+                            .catch(function(response) {
+                                angular.forEach(response.data, function(value, key) {
+                                    scope.errors.push(value[0]);
+                                });
                             });
                     };
                 }

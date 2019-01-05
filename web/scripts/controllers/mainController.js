@@ -2,7 +2,7 @@
     'use strict';
 
     var module = angular.module('main', ['fileService']);
-    
+
     module.controller('mainCtrl', [
         '$scope',
         'fileFactory',
@@ -14,9 +14,8 @@
                 }
             }
             var getFileList = function () {
-                console.log( $rootScope.Token)
                 var token = $rootScope.Token;
-                fileFactory.getFileList(token).then(function (response) {                        
+                fileFactory.getFileList(token).then(function (response) {
                     if (checkFileListLength(response)) {
                         $scope.fileList = response.data;
                         $scope.displayList = true;

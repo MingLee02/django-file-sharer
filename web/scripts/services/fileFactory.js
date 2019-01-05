@@ -9,7 +9,6 @@
         function ($http, $q) {
 
             var uploadFile = function (data, token) {
-                console.log('iom')
                 return $http({
                     method: 'POST',
                     url: 'http://localhost:8000/file/upload/',
@@ -30,9 +29,17 @@
                 });
             }
 
+            var getPublicFileList = function (token) {
+                return $http({
+                    method: 'GET',
+                    url: 'http://localhost:8000/file/public-list/',
+                });
+            }
+
             return {
                 'uploadFile': uploadFile,
-                'getFileList': getFileList
+                'getFileList': getFileList,
+                'getPublicFileList': getPublicFileList
             };
         }
     ]);

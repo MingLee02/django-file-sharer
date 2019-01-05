@@ -1,5 +1,8 @@
-<div class="alert alert-success" ng-if="registered === true">
-    <p translate>Your account has been created.</p>
+
+<div ng-if="errors">
+    <ul ng-repeat="error in errors">
+        <li  class="alert alert-danger">{{ error }}</li>
+    </ul>
 </div>
 
 <div class="form-group">

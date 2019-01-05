@@ -4,3 +4,40 @@
 <form login-form id="login" ng-submit="login()"></form>
 
 <a href="#!register">No Account? Register one</a>
+
+<br>
+
+<h2>Public files</h2>
+
+
+<button ng-click="displayList = !displayList">Toggle List View/Table View</button>
+
+<div ng-if="displayList">
+    <div ng-if="fileList">
+        <ul class="list-unstyled" ng-repeat="file in fileList track by $index">
+            <li class='items'>
+                <h2>{{ file.title }}</h2>
+                <p>File Name: {{ file.file }}</p>
+                <p>{{ file.description }}</p>
+                <a href="{{file.file}}" download>Download File</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div ng-if="!displayList">
+    <table ng-if="fileList">
+        <tr>
+            <th>Title</th>
+            <th>File Name</th>
+            <th>Description</th>
+            <th>Download</th>
+        </tr>
+        <tr ng-repeat="file in fileList track by $index">
+            <td>{{ file.title }}</td>
+            <td>{{ file.file }}</td>
+            <td>{{ file.description }}</td>
+            <td><a href="{{file.file}}" download>Download</a></td>
+        </tr>
+    </table>
+</div>
