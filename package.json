@@ -26,6 +26,6 @@
     },
     "scripts": {
       "postinstall": "bash ./post_install.sh",
-      "start": "grunt prod",
+      "start": "grunt prod"
     }
 }
