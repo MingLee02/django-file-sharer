@@ -64,4 +64,10 @@ module.exports = function (grunt) {
             'watch'
         ]);
     });
+
+    grunt.registerTask('prod', function () {
+        grunt.task.run([
+            'connect:dev'
+        ]);
+    });
 };
