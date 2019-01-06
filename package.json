@@ -1,7 +1,6 @@
 {
     "name": "file-sharer",
     "devDependencies": {
-        "grunt": "1.0.1",
         "grunt-angular-templates": "1.0.4",
         "grunt-browserify": "5.0.0",
         "grunt-contrib-clean": "1.0.0",
@@ -22,7 +21,11 @@
         "karma-safari-launcher": "^1.0.0",
         "karma-spec-reporter": "0.0.31"
     },
+    "dependencies": {
+        "grunt": "1.0.1"
+    },
     "scripts": {
-      "start": "grunt prod"
+      "postinstall": "bash ./post_install.sh",
+      "start": "grunt prod",
     }
 }
